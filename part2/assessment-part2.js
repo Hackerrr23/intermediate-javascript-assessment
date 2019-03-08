@@ -43,7 +43,13 @@ function noWeakLink() {
     method: 'GET',
     url: '/api/users'
   })
-  // CODE HERE...
+  .then(res => {
+    firstUser = res.data[0]
+    return res})
+  .then(response => {
+    thirdUser = response.data[2]
+    return response.data[9]
+  })
 
 }
 
@@ -66,6 +72,15 @@ function noWeakLink() {
 // When boundToElephant gets called, it should return this exact string:
 // 'My name is Horton and I am very heavy!' (The above instructions should make this work.  No code needed for this paragraph)
 
+// var elephant = {
+//   name: 'Horton'
+// }
+// function large() {
+
+//   return 'My name is ' + this.name + ' and I am very heavy!'
+// }
+// CODE HERE...
+
 var elephant = {
   name: 'Horton'
 }
@@ -73,9 +88,8 @@ function large() {
 
   return 'My name is ' + this.name + ' and I am very heavy!'
 }
-// CODE HERE...
 
-
+boundToElephant = large.bind(elephant)
 
 // *************
 // * PROBLEM 3 *
@@ -89,7 +103,10 @@ function large() {
 
 // CODE HERE...
 
-
+function deathStar(capacity,crew){
+  const bounded = capacity.bind(crew)
+  return bounded
+}
 
 // *************
 // * PROBLEM 4 *
@@ -104,7 +121,11 @@ function large() {
 
 // CODE HERE...
 
-
+function accountingOffice(assets){
+  return function(liabilities){
+    return assets + liabilities
+  }
+}
 
 // *************
 // * PROBLEM 5 *
@@ -128,7 +149,14 @@ function large() {
 // };
 
 // CODE HERE...
+const forgetter = name => {
+  let arr = [];
 
+  return function rememberall(item) {
+    arr.push(item);
+    return { name, remember: arr };
+  };
+};
 
 
 // *************
